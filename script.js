@@ -50,13 +50,12 @@ function newOperatorPressed(event) {
     const opPressed = event.target.dataset.op
 
     if (num1 && num2) {
-        operate(num1, num2, operation);
+        result = operate(num1, num2, operation);
         display.textContent = result;
-        reset(opPressed)
-        }
-    else {
-        if (opPressed != 'equals')
-            operation = opPressed;
+        reset(opPressed);
+        
+    } else if (opPressed !== 'equals') {
+        operation = opPressed;
     }
 }
 
@@ -64,30 +63,25 @@ function operate(a, b, oper) {
     if (parseInt(a) && parseInt(b)) {
         switch (oper) {
             case 'add': 
-                result = add(a,b); 
-                break;
+                return add(a,b); 
             case 'subtract': 
-                result = subtract(a,b);
-                break;
+                return subtract(a,b);
             case 'multiply': 
-                result = multiply(a,b);
-                break;
+                return multiply(a,b);
             case 'divide': 
-                result = divide(a,b);
-                break;
-            case 'equal': 
-                result = operate(a, b, operation);
-                break;
+                return divide(a,b);
+            default:  
+                return operate(a, b, operation);
         };
     } else {
-        result = NaN;
+        return NaN;
     }
 };
 
 // reset num1, num2, result, and operation and reassign 
 function reset(opPressed) {
     if (opPressed === 'equal') {
-        
+        operation = 'equal';
     } else {
         num1 = result;
         operation = opPressed;
