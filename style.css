@@ -1,5 +1,5 @@
 body {
-    font-family: 'Cascadia', 'Times New Roman', Times, serif;
+    font-family: 'Cascadia Mono', Verdana, Geneva, Tahoma, sans-serif;
     
     display: flex;
     justify-content: center;
@@ -14,10 +14,11 @@ body {
     background-color: #E3874E;
     border: 5px solid #582A0E;
 
-    padding:  1rem;
+    padding:  1.5rem 1rem 0.75rem;
     border-radius: 1rem;
 }
 
+/* container for calc */
 .container {
     display: flex;
     flex-direction: column;
@@ -34,8 +35,24 @@ body {
     height: 10vh;
     border-radius: 1rem;
     margin-bottom: 1rem;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
+
+/* this fits max like */
+.display {
+    color: #1D0C12;
+    padding-right: 1rem;
+    font-size: 62px;
+
+}
+
+
+/* buttons */
+/* ---------------------------------------------------- */
 .buttons {
     display: flex;
     flex-flow: wrap;
@@ -46,6 +63,7 @@ body {
 }
 
 button {
+    font-family: 'Cascadia Mono', Verdana, Geneva, Tahoma, sans-serif;
     flex: 1;
     min-width: 6vw;
 
@@ -62,7 +80,6 @@ button {
     display: flex;
     flex: 1;
     gap: 1px;
-
 }
 
 #num0 {
@@ -76,11 +93,9 @@ button {
 
 
 /* colors: 
-
 #401F29 - purple
 #9C8F76 - beaver 
 #F3C99C - sunset
 #E3874E - orange
 #DC4C36 - vermillion
-
 */
