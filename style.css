@@ -42,7 +42,7 @@ body {
     flex: 1;
     gap: 1px;
 
-    padding: 0 0.75rem 0.75rem;
+    padding: 0.75rem;
 }
 
 button {
@@ -55,8 +55,25 @@ button {
     font-size: x-large;
     border-radius: 4px;
     box-sizing: border-box;
-    border: 2px solid rgb(139, 40, 24);
+    border: 2px solid rgb(139, 40, 24, 0.9);
 }
+
+.bottomRow {
+    display: flex;
+    flex: 1;
+    gap: 1px;
+
+}
+
+#num0 {
+    min-width: 49.8%
+}
+
+#dot, 
+#equals {
+    min-width: max-content;
+}
+
 
 /* colors: 
 
