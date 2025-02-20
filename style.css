@@ -24,7 +24,7 @@ body {
     flex-direction: column;
 
     height: 550px;
-    width: 425px;
+    width: 426px;
 }
 
 .screen {
@@ -42,12 +42,10 @@ body {
 }
 
 
-/* this fits max like */
 .display {
     color: #1D0C12;
     padding-right: 1rem;
-    font-size: 62px;
-
+    font-size: 66px;
 }
 
 
