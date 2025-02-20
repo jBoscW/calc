@@ -1,0 +1,57 @@
+body {
+    font-family: 'Cascadia', 'Times New Roman', Times, serif;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: #F3C99C;
+    height: 100vh;
+    margin: 0;
+}
+
+.around {
+    background-color: #E3874E;
+
+    padding:  1rem;
+    border-radius: 1rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 60vh;
+    max-width: 30vw;
+}
+
+.screen {
+    box-sizing: border-box;
+    border: 3px solid #3B352B;
+    background-color: #9C8F76;
+
+    height: 10vh;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+button {
+    flex: 1;
+    min-width: 6vw;
+    
+}
+
+/* colors: 
+
+#401F29 - purple
+#9C8F76 - beaver 
+#F3C99C - sunset
+#E3874E - orange
+#DC4C36 - vermillion
+*/

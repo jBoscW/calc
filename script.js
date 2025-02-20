@@ -15,6 +15,10 @@ function divide(a, b) {
     return b === 0 ? "halt criminal." : a/b;
 };
 
-let num1, num2, operation;
+let num1, num2, operation, result;
 
-operator
+function operate(a, b, oper) {
+
+}
+
+console.log(NaN + 3)
