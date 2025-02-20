@@ -46,13 +46,41 @@ function newDigit(event) {
     };
 };
 
+function newOperator(event) {
+    const opPressed = event.target.dataset.op
+
+    if (num1 && num2){
+        switch (opPressed) {
+            case 'add':
+                console.log(1);
+                break;
+            case 'subtract':
+                console.log(2);
+                break;
+            case 'multiply':
+                console.log(3);
+                break;
+            case 'divide':
+                console.log(4);
+                break;
+            case 'equal':
+                console.log(5);
+                break
+        }
+    }
+    else {
+        operation = opPressed;
+    }
+}
 
 function operate(a, b, oper) {
-
+    // add here
+    return result;
 };
 
-
+ 
 
 
 //Event Listeners
-numbers.forEach(numButton => numButton.addEventListener('click', newDigit))
+numbers.forEach(numButton => numButton.addEventListener('click', newDigit));
+operators.forEach(opButton => opButton.addEventListener('click', newOperator));
