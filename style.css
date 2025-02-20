@@ -12,19 +12,23 @@ body {
 
 .around {
     background-color: #E3874E;
+    border: 5px solid #582A0E;
 
     padding:  1rem;
     border-radius: 1rem;
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+
     height: 65vh;
     width: 28vw;
 }
 
 .screen {
     box-sizing: border-box;
-    border: 3px solid #3B352B;
+    border: 3.5px solid #3B352B;
     background-color: #9C8F76;
 
     height: 10vh;
@@ -34,14 +38,24 @@ body {
 
 .buttons {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    flex-flow: wrap;
+    flex: 1;
+    gap: 1px;
+
+    padding: 0 0.75rem 0.75rem;
 }
 
 button {
     flex: 1;
     min-width: 6vw;
-    height: auto;
+
+    background-color: #DC4C36;
+    color: #F8E1C9;
+
+    font-size: x-large;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 2px solid rgb(139, 40, 24);
 }
 
 /* colors: 
@@ -51,4 +65,5 @@ button {
 #F3C99C - sunset
 #E3874E - orange
 #DC4C36 - vermillion
+
 */
