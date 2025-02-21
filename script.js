@@ -29,17 +29,17 @@ function divide(a, b) {
 function updateDisplay(num) {
     const numString = num.toString();
 
-    if (numString.length > 10) {
-        display.textContent = 'NaN';
-    } else {
+    // if (numString.length > 100) {
+    //     display.textContent = 'NaN';
+    // } else {
         display.textContent = num;
-    };
+    // };
 };
 
 function extraPressed(event) {
     switch (event.target.id) {
         case 'AC':
-            num1 = num2 = result = operation = null;
+            reset('AC')
             updateDisplay(0);
             break;
         case 'plusMinus': 
@@ -89,20 +89,56 @@ function newDigit(event) {
 function newOperatorPressed(event) {
     const opPressed = event.target.dataset.op;
 
-    result = operate(num1, num2, opPressed);
+    if (num1 && num2) {
+        result = operate(num1, num2, operation);
+        updateDisplay(result);
+        reset();
+    } 
     
     if (opPressed !== 'equal') {
-        
+        operation = opPressed;
     }
 }
 
 function operate(a, b, oper) {
+    if (parseFloat(a) && parseFloat(b)) {
+        switch (oper) {
+            case 'add': 
+                return add(a,b); 
+            case 'subtract': 
+                return subtract(a,b);
+            case 'multiply': 
+                return multiply(a,b);
+            case 'divide': 
+                return divide(a,b);
+        };
 
+    } else {
+        return NaN;
+    }
 };
 
+function reset(AC = false) {
+    AC ? (num1 = null) : (num1 = result);
 
+    num2 = result = operation = null; 
+}
 
 //Event Listeners
 numbers.forEach(numButton => numButton.addEventListener('click', newDigit));
 operators.forEach(opButton => opButton.addEventListener('click', newOperatorPressed));
 extras.forEach(extraButton => extraButton.addEventListener('click', extraPressed))
+
+
+// unction newOperatorPressed(event) {
+//     const opPressed = event.target.dataset.op
+
+//     if (num1 && num2) {
+//         result = operate(num1, num2, operation);
+//         display.textContent = result;
+//         reset(opPressed);
+        
+//     } else if (opPressed !== 'equals') {
+//         operation = opPressed;
+//     }
+// }
