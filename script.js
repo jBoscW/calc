@@ -54,7 +54,7 @@ function newOperatorPressed(event) {
         display.textContent = result;
         reset(opPressed);
         
-    } else if (opPressed !== 'equals') {
+    } else if (opPressed !== 'equal') {
         operation = opPressed;
     }
 }
@@ -70,8 +70,6 @@ function operate(a, b, oper) {
                 return multiply(a,b);
             case 'divide': 
                 return divide(a,b);
-            default:  
-                return operate(a, b, operation);
         };
     } else {
         return NaN;
@@ -80,14 +78,10 @@ function operate(a, b, oper) {
 
 // reset num1, num2, result, and operation and reassign 
 function reset(opPressed) {
-    if (opPressed === 'equal') {
-        operation = 'equal';
-    } else {
-        num1 = result;
-        operation = opPressed;
-        num2 = null;
-        result = null;
-    };
+    num1 = result;
+    operation = opPressed;
+    num2 = null;
+    result = null;
 }
 
 //Event Listeners
