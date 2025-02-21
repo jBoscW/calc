@@ -4,10 +4,9 @@ const display = document.querySelector('.display');
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 const extras = document.querySelectorAll('.extra');
-const buttons = document.querySelectorAll('button');
 
 
-let num1, num2, operation, result;
+let num1, num2, operation, result, equalPressed;
 
 //Function: basic
 function add(a, b) {
@@ -72,7 +71,7 @@ function newDigit(event) {
     if (num1 != null) num1String = num1.toString();
     if (num2 != null) num2String = num2.toString();
     
-    if (!num1) {
+    if (!num1 || equalPressed) {
         num1 = parseFloat(digitPressedString);
         updateDisplay(num1);
     } else if (num1 && !operation) {
@@ -93,12 +92,16 @@ function newOperatorPressed(event) {
     if (num1 && num2) {
         result = operate(num1, num2, operation);
         updateDisplay(result);
-        reset(); // <=================
+        reset(); 
     } 
     
-    if (opPressed !== 'equal') {
-        operation = opPressed;
+    if (opPressed === 'equal') {
+        equalPressed = true;
     }
+    else {
+        operation = opPressed;
+        equalPressed = false;
+    } 
 }
 
 function operate(a, b, oper) {
