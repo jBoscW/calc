@@ -39,17 +39,31 @@ function updateDisplay(num) {
 function extraPressed(event) {
     switch (event.target.id) {
         case 'AC':
-            num1 = num2 = result = null;
-            operation = null;
+            num1 = num2 = result = operation = null;
             updateDisplay(0);
             break;
         case 'plusMinus': 
             if (num2) {
                 num2 = -num2;
-
+                updateDisplay(num2);
             } else if (num1) {
-                num1 = -num1
-            }
+                num1 = -num1;
+                updateDisplay(num1);
+            };
+            break;
+        case 'percentage':
+            if (num2) {
+                num2 /= 100;
+                updateDisplay(num2);
+            } else if (num1) {
+                num1 /= 100;
+                updateDisplay(num1);
+            };
+            break;
+        case 'dot':
+            if (num2) {
+                
+            };
     };
 }
 
