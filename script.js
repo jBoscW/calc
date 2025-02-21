@@ -133,17 +133,3 @@ function reset(AC = false) {
 numbers.forEach(numButton => numButton.addEventListener('click', newDigit));
 operators.forEach(opButton => opButton.addEventListener('click', newOperatorPressed));
 extras.forEach(extraButton => extraButton.addEventListener('click', extraPressed))
-
-
-// unction newOperatorPressed(event) {
-//     const opPressed = event.target.dataset.op
-
-//     if (num1 && num2) {
-//         result = operate(num1, num2, operation);
-//         display.textContent = result;
-//         reset(opPressed);
-        
-//     } else if (opPressed !== 'equals') {
-//         operation = opPressed;
-//     }
-// }
