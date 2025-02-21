@@ -34,7 +34,7 @@ function updateDisplay(num) {
     } else {
         display.textContent = num;
     };
-}
+};
 
 function extraPressed(event) {
     switch (event.target.id) {
@@ -60,12 +60,8 @@ function extraPressed(event) {
                 updateDisplay(num1);
             };
             break;
-        case 'dot':
-            if (num2) {
-                
-            };
     };
-}
+};
 
 // event listener digits and operations
 function newDigit(event) {
@@ -91,8 +87,13 @@ function newDigit(event) {
 };
 
 function newOperatorPressed(event) {
-    const opPressed = event.target.dataset.op
+    const opPressed = event.target.dataset.op;
 
+    result = operate(num1, num2, opPressed);
+    
+    if (opPressed !== 'equal') {
+        
+    }
 }
 
 function operate(a, b, oper) {
