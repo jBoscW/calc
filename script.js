@@ -1,10 +1,11 @@
 //Initializing variables
 const display = document.querySelector('.display');
-const buttons = document.querySelectorAll('button');
 
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 const extras = document.querySelectorAll('.extra');
+const buttons = document.querySelectorAll('button');
+
 
 let num1, num2, operation, result;
 
@@ -124,10 +125,24 @@ function reset(AC = false) {
     num2 = result = operation = null; 
 }
 
+
+// visual effects buttons
+const darkening = function() {this.style.filter = 'brightness(0.9)'}
+const darkeningMore = function() {this.style.filter = 'brightness(0.75)'}
+const lightening = function() {this.style.filter = 'brightness(1)'}
+
 //Event Listeners
 numbers.forEach(numButton => numButton.addEventListener('click', newDigit));
 operators.forEach(opButton => opButton.addEventListener('click', newOperatorPressed));
 extras.forEach(extraButton => extraButton.addEventListener('click', extraPressed))
+buttons.forEach(button => {
+    button.addEventListener('mousedown', darkeningMore);
+    button.addEventListener('mouseup', lightening)
+    button.addEventListener('mouseover', darkening);
+    button.addEventListener('mouseout', lightening);
+});
+
+
 
 
 // unction newOperatorPressed(event) {
