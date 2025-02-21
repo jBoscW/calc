@@ -72,6 +72,7 @@ function newDigit(event) {
     if (num2 != null) num2String = num2.toString();
     
     if (!num1 || equalPressed) {
+        equalPressed = false;
         num1 = parseFloat(digitPressedString);
         updateDisplay(num1);
     } else if (num1 && !operation) {
@@ -86,8 +87,8 @@ function newDigit(event) {
     };
 };
 
-function newOperatorPressed(event) {
-    const opPressed = event.target.dataset.op;
+function newOperatorPressed() {
+    const opPressed = this.dataset.op;
 
     if (num1 && num2) {
         result = operate(num1, num2, operation);
@@ -101,6 +102,8 @@ function newOperatorPressed(event) {
     else {
         operation = opPressed;
         equalPressed = false;
+
+        this.st
     } 
 }
 
@@ -130,6 +133,6 @@ function reset(AC = false) {
 
 
 //Event Listeners
-numbers.forEach(numButton => numButton.addEventListener('click', newDigit));
-operators.forEach(opButton => opButton.addEventListener('click', newOperatorPressed));
-extras.forEach(extraButton => extraButton.addEventListener('click', extraPressed))
+numbers.forEach(button => button.addEventListener('click', newDigit));
+operators.forEach(button => button.addEventListener('click', newOperatorPressed));
+extras.forEach(button => button.addEventListener('click', extraPressed))
