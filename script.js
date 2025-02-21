@@ -8,7 +8,7 @@ const extras = document.querySelectorAll('.extra');
 
 let num1, num2, operation, result;
 
-//basic functions
+//function: basic
 function add(a, b) {
     return a+b;
 };
@@ -25,65 +25,69 @@ function divide(a, b) {
     return b === 0 ? "halt criminal." : a/b;
 };
 
-// event listener functions
-function newDigit(event) {
-    const digitPressed = event.target.dataset.num;
+// function: updateDisplay and extra listeners;
+function updateDisplay(num) {
+    const numString = num.toString();
 
-    if (display.textContent.length < 10) {    
-        if (!num1) {
-            display.textContent = digitPressed;
-            num1 = parseInt(digitPressed);
-        } else if (num1 && !operation) {
-            display.textContent += digitPressed;
-            num1 = parseInt(display.textContent);
-        } else if (operation && !num2) {
-            display.textContent = digitPressed;
-            num2 = parseInt(digitPressed);
-        } else {
-            display.textContent += digitPressed;
-            num2 = parseInt(display.textContent);
-        };
+    if (numString.length > 10) {
+        display.textContent = 'NaN';
+    } else {
+        display.textContent = num;
+    };
+}
+
+function extraPressed(event) {
+    switch (event.target.id) {
+        case 'AC':
+            num1 = num2 = result = null;
+            operation = null;
+            updateDisplay(0);
+            break;
+        case 'plusMinus': 
+            if (num2) {
+                num2 = -num2;
+
+            } else if (num1) {
+                num1 = -num1
+            }
+    };
+}
+
+// event listener digits and operations
+function newDigit(event) {
+    const digitPressedString = event.target.dataset.num;
+    // wrap an if statement here for the "digit following = case"
+    let num1String, num2String; 
+    if (num1 != null) num1String = num1.toString();
+    if (num2 != null) num2String = num2.toString();
+    
+    if (!num1) {
+        num1 = parseFloat(digitPressedString);
+        updateDisplay(num1);
+    } else if (num1 && !operation) {
+        num1 = parseFloat(num1String + digitPressedString);
+        updateDisplay(num1);
+    } else if (operation && !num2) {
+        num2 = parseFloat(digitPressedString);
+        updateDisplay(num2);
+    } else {
+        num2 = parseFloat(num2String + digitPressedString);
+        updateDisplay(num2);
     };
 };
 
 function newOperatorPressed(event) {
     const opPressed = event.target.dataset.op
 
-    if (num1 && num2) {
-        result = operate(num1, num2, operation);
-        display.textContent = result;
-        reset(opPressed);
-        
-    } else if (opPressed !== 'equal') {
-        operation = opPressed;
-    }
 }
 
 function operate(a, b, oper) {
-    if (parseInt(a) && parseInt(b)) {
-        switch (oper) {
-            case 'add': 
-                return add(a,b); 
-            case 'subtract': 
-                return subtract(a,b);
-            case 'multiply': 
-                return multiply(a,b);
-            case 'divide': 
-                return divide(a,b);
-        };
-    } else {
-        return NaN;
-    }
+
 };
 
-// reset num1, num2, result, and operation and reassign 
-function reset(opPressed) {
-    num1 = result;
-    operation = opPressed;
-    num2 = null;
-    result = null;
-}
+
 
 //Event Listeners
 numbers.forEach(numButton => numButton.addEventListener('click', newDigit));
 operators.forEach(opButton => opButton.addEventListener('click', newOperatorPressed));
+extras.forEach(extraButton => extraButton.addEventListener('click', extraPressed))
