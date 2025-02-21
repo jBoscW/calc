@@ -64,17 +64,18 @@ function extraPressed(event) {
 };
 
 // Function: Event Listener Digits And Operations
-function newDigit(event) {
-    const digitPressedString = event.target.dataset.num;
-    // wrap an if statement here for the "digit following = case"
+function newDigit() {
+    const digitPressedString = this.dataset.num;
+
     let num1String, num2String; 
     if (num1 != null) num1String = num1.toString();
     if (num2 != null) num2String = num2.toString();
     
     if (!num1 || equalPressed) {
-        equalPressed = false;
         num1 = parseFloat(digitPressedString);
         updateDisplay(num1);
+
+        equalPressed = false;
     } else if (num1 && !operation) {
         num1 = parseFloat(num1String + digitPressedString);
         updateDisplay(num1);
@@ -89,7 +90,11 @@ function newDigit(event) {
 
 function newOperatorPressed() {
     const opPressed = this.dataset.op;
-
+    const clearShine = [
+        () => operators.forEach(button => button.className = 'operator')
+    ];
+    clearShine[0]();
+    
     if (num1 && num2) {
         result = operate(num1, num2, operation);
         updateDisplay(result);
@@ -98,12 +103,14 @@ function newOperatorPressed() {
     
     if (opPressed === 'equal') {
         equalPressed = true;
+        clearShine[0]();
     }
     else {
         operation = opPressed;
         equalPressed = false;
 
-        this.st
+        clearShine[0]();
+        this.classList.add('colorOperator');
     } 
 }
 
