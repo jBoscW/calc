@@ -9,7 +9,7 @@ const buttons = document.querySelectorAll('button');
 
 let num1, num2, operation, result;
 
-//function: basic
+//Function: basic
 function add(a, b) {
     return a+b;
 };
@@ -26,7 +26,7 @@ function divide(a, b) {
     return b === 0 ? "halt criminal." : a/b;
 };
 
-// function: updateDisplay and extra listeners;
+// Function: updateDisplay and extra listeners;
 function updateDisplay(num) {
     const numString = num.toString();
 
@@ -64,7 +64,7 @@ function extraPressed(event) {
     };
 };
 
-// event listener digits and operations
+// Function: Event Listener Digits And Operations
 function newDigit(event) {
     const digitPressedString = event.target.dataset.num;
     // wrap an if statement here for the "digit following = case"
@@ -93,7 +93,7 @@ function newOperatorPressed(event) {
     if (num1 && num2) {
         result = operate(num1, num2, operation);
         updateDisplay(result);
-        reset();
+        reset(); // <=================
     } 
     
     if (opPressed !== 'equal') {
@@ -126,23 +126,10 @@ function reset(AC = false) {
 }
 
 
-// visual effects buttons
-const darkening = function() {this.style.filter = 'brightness(0.9)'}
-const darkeningMore = function() {this.style.filter = 'brightness(0.75)'}
-const lightening = function() {this.style.filter = 'brightness(1)'}
-
 //Event Listeners
 numbers.forEach(numButton => numButton.addEventListener('click', newDigit));
 operators.forEach(opButton => opButton.addEventListener('click', newOperatorPressed));
 extras.forEach(extraButton => extraButton.addEventListener('click', extraPressed))
-buttons.forEach(button => {
-    button.addEventListener('mousedown', darkeningMore);
-    button.addEventListener('mouseup', lightening)
-    button.addEventListener('mouseover', darkening);
-    button.addEventListener('mouseout', lightening);
-});
-
-
 
 
 // unction newOperatorPressed(event) {
