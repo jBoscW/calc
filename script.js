@@ -91,7 +91,7 @@ function newDigit() {
 function newOperatorPressed() {
     const opPressed = this.dataset.op;
     const clearShine = [
-        () => operators.forEach(button => button.className = 'operator')
+        () => operators.forEach(button => button.className = 'operator'), 
     ];
     clearShine[0]();
     
