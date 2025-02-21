@@ -90,10 +90,8 @@ function newDigit() {
 
 function newOperatorPressed() {
     const opPressed = this.dataset.op;
-    const clearShine = [
-        () => operators.forEach(button => button.className = 'operator'), 
-    ];
-    clearShine[0]();
+    const clearShine = () => operators.forEach(button => button.className = 'operator');
+    clearShine();
     
     if (num1 && num2) {
         result = operate(num1, num2, operation);
@@ -103,13 +101,10 @@ function newOperatorPressed() {
     
     if (opPressed === 'equal') {
         equalPressed = true;
-        clearShine[0]();
     }
     else {
         operation = opPressed;
         equalPressed = false;
-
-        clearShine[0]();
         this.classList.add('colorOperator');
     } 
 }
