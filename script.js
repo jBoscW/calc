@@ -29,17 +29,17 @@ function divide(a, b) {
 function updateDisplay(num) {
     const numString = num.toString();
 
-    // if (numString.length > 100) {
-    //     display.textContent = 'NaN';
-    // } else {
+    if ((num / (10 ** 10) > 1) && numString.length > 10) {
+        display.textContent = 'NaN';
+    } else {
         display.textContent = num;
-    // };
+    };
 };
 
 function extraPressed(event) {
     switch (event.target.id) {
         case 'AC':
-            reset('AC')
+            num1 = num2 = result = operation = null;
             updateDisplay(0);
             break;
         case 'plusMinus': 
@@ -71,10 +71,10 @@ function newDigit() {
     if (num1 != null) num1String = num1.toString();
     if (num2 != null) num2String = num2.toString();
     
+    // this code seemed the most readable? maybe there's smth better
     if (!num1 || equalPressed) {
         num1 = parseFloat(digitPressedString);
         updateDisplay(num1);
-
         equalPressed = false;
     } else if (num1 && !operation) {
         num1 = parseFloat(num1String + digitPressedString);
@@ -90,15 +90,18 @@ function newDigit() {
 
 function newOperatorPressed() {
     const opPressed = this.dataset.op;
-    const clearShine = () => operators.forEach(button => button.className = 'operator');
-    clearShine();
+    operators.forEach(button => button.className = 'operator');
     
     if (num1 && num2) {
         result = operate(num1, num2, operation);
         updateDisplay(result);
-        reset(); 
+
+        num1 = result;
+        num2 = result = operation = 0;
     } 
     
+    // couldn't think of another way of connecting digits to operators (hence equalPressed) 
+    // for digit after 0.
     if (opPressed === 'equal') {
         equalPressed = true;
     }
@@ -127,11 +130,6 @@ function operate(a, b, oper) {
     }
 };
 
-function reset(AC = false) {
-    AC ? (num1 = null) : (num1 = result);
-
-    num2 = result = operation = null; 
-}
 
 
 //Event Listeners
