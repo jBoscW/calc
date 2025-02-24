@@ -38,15 +38,18 @@ function updateDisplay(num) {
         const decPart = numString.split('.')[1];
         const decLength = decPart ? decPart.length : 0;    
         
-        if ((intLength + decLength) > 10 && intLength < 10 && numString.length > 10) {
+
+        // the dot counts as one btw
+        if ((intLength + decLength) > 9 && intLength < 9 && numString.length > 9) {
             const decimalShown = 9 - intLength;
-            let shown = Math.floor(num * 10**decimalShown) / (10**decimalShown);
-            if (shown.toString().length > 10) shown = NaN;
+            const shown = Math.floor(num * 10**decimalShown) / (10**decimalShown);
+            if (shown.toString().length > 10) 
+                shown = NaN;
             display.textContent = shown;
-        } else if (intLength >= 10 && numString.length > 10) {
-            display.textContent = 'NaN';
-        } else {
+        } else if (intLength <= 10 && numString.length <= 10) {
             display.textContent = num;
+        } else {
+            display.textContent = 'NaN';
         };
     }
     
