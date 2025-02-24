@@ -34,9 +34,9 @@ function updateDisplay(num) {
         const numString = num.toString();
 
         const intPart = numString.split('.')[0];
-        const intLength = intPart ? intPart.length : 0;    
+        const intLength = intPart ? intPart.length : 0;
         const decPart = numString.split('.')[1];
-        const decLength = decPart ? decPart.length : 0;    
+        const decLength = decPart ? decPart.length : 0;
         
 
         // the dot counts as one btw
@@ -51,8 +51,7 @@ function updateDisplay(num) {
         } else {
             display.textContent = 'NaN';
         };
-    }
-    
+    };
 };
 
 function extraPressed() {
@@ -90,23 +89,22 @@ function newDigit() {
     if (num1 != null) num1String = num1.toString();
     if (num2 != null) num2String = num2.toString();
     
-
     // this code seemed the most readable? maybe there's smth better
+    // check if it's the first digit or not
     if ((num1 == null) || equalPressed) {
-        num1 = parseFloat(digitPressedString);
+        num1 = dotHelper1(digitPressedString);
         updateDisplay(num1);
         equalPressed = false;
     } else if ((num1 != null) && !operation) {
-        num1 = parseFloat(num1String + digitPressedString);
+        num1 = dotHelper2(num1String, digitPressedString);
         updateDisplay(num1);
     } else if (operation && (num2 == null)) {
-        num2 = parseFloat(digitPressedString);
+        num2 = dotHelper1(digitPressedString);
         updateDisplay(num2);
     } else {
-        num2 = parseFloat(num2String + digitPressedString);
+        num2 = dotHelper2(num2String, digitPressedString);
         updateDisplay(num2);
     };
-
 };
 
 function newOperatorPressed() {
@@ -153,10 +151,39 @@ function operate(a, b, oper) {
     }
 };
 
+//for the first digit;
+function dotHelper1(numPressed) {
+    let numUpdate; 
+
+    if (dotPressed) {
+        numUpdate = parseFloat('0.' + numPressed);
+    } else {
+        numUpdate = parseFloat(numPressed); 
+    }
+
+    dotPressed = false;
+    return numUpdate;
+}
+
+//for the second digit onwards;
+function dotHelper2(numString, numPressed) {
+    let numUpdate;
+
+    if (!numString.includes('.') && dotPressed) {
+        numUpdate = parseFloat(numString + '.' + numPressed);
+    } else {
+        numUpdate = parseFloat(numString + numPressed);
+    }
+
+    dotPressed = false;
+    return numUpdate;
+}
 
 
 //Event Listeners
 numbers.forEach(button => button.addEventListener('click', newDigit));
 operators.forEach(button => button.addEventListener('click', newOperatorPressed));
 extras.forEach(button => button.addEventListener('click', extraPressed))
-dot.addEventListener('click', () => dotPressed = true)
+dot.addEventListener('click', () => {
+    dotPressed = true;
+})
