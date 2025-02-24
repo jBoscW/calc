@@ -22,22 +22,25 @@ function multiply(a, b) {
 };
 
 function divide(a, b) {
-    return b === 0 ? "halt criminal." : a/b;
+    return b === 0 ? "criminal." : a/b;
 };
 
 // Function: updateDisplay and extra listeners;
 function updateDisplay(num) {
     const numString = num.toString();
 
-    if ((num / (10 ** 10) > 1) && numString.length > 10) {
+    if (num === 'criminal.') {
+        display.textContent = num;
+        num1 = num2 = result = operation = null;
+    } else if ((num / (10 ** 10) >= 1) && numString.length > 10) {
         display.textContent = 'NaN';
     } else {
         display.textContent = num;
     };
 };
 
-function extraPressed(event) {
-    switch (event.target.id) {
+function extraPressed() {
+    switch (this.id) {
         case 'AC':
             num1 = num2 = result = operation = null;
             updateDisplay(0);
@@ -72,14 +75,14 @@ function newDigit() {
     if (num2 != null) num2String = num2.toString();
     
     // this code seemed the most readable? maybe there's smth better
-    if (!num1 || equalPressed) {
+    if ((num1 == null) || equalPressed) {
         num1 = parseFloat(digitPressedString);
         updateDisplay(num1);
         equalPressed = false;
-    } else if (num1 && !operation) {
+    } else if ((num1 != null) && !operation) {
         num1 = parseFloat(num1String + digitPressedString);
         updateDisplay(num1);
-    } else if (operation && !num2) {
+    } else if (operation && (num2 == null)) {
         num2 = parseFloat(digitPressedString);
         updateDisplay(num2);
     } else {
@@ -92,28 +95,31 @@ function newOperatorPressed() {
     const opPressed = this.dataset.op;
     operators.forEach(button => button.className = 'operator');
     
-    if (num1 && num2) {
-        result = operate(num1, num2, operation);
-        updateDisplay(result);
+    if (display.textContent !== 'criminal.') {
+        // just checking for 'num2' excludes 0.
+        if ((num1 != null) && (num2 != null)) {
+            result = operate(num1, num2, operation);
+            updateDisplay(result);
 
-        num1 = result;
-        num2 = result = operation = 0;
-    } 
-    
-    // couldn't think of another way of connecting digits to operators (hence equalPressed) 
-    // for digit after 0.
-    if (opPressed === 'equal') {
-        equalPressed = true;
-    }
-    else {
-        operation = opPressed;
-        equalPressed = false;
-        this.classList.add('colorOperator');
-    } 
+            num1 = result;
+            num2 = result = operation = null;
+        } 
+        
+        // couldn't think of another way of connecting digits to operators (hence equalPressed) 
+        // for digit after 0.
+        if (opPressed === 'equal') {
+            equalPressed = true;
+        }
+        else {
+            operation = opPressed;
+            equalPressed = false;
+            this.classList.add('colorOperator');
+        } 
+    };
 }
 
 function operate(a, b, oper) {
-    if (parseFloat(a) && parseFloat(b)) {
+    if ((parseFloat(a)) != null && parseFloat(b) != null) {
         switch (oper) {
             case 'add': 
                 return add(a,b); 
@@ -124,7 +130,6 @@ function operate(a, b, oper) {
             case 'divide': 
                 return divide(a,b);
         };
-
     } else {
         return NaN;
     }
