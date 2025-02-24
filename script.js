@@ -184,6 +184,4 @@ function dotHelper2(numString, numPressed) {
 numbers.forEach(button => button.addEventListener('click', newDigit));
 operators.forEach(button => button.addEventListener('click', newOperatorPressed));
 extras.forEach(button => button.addEventListener('click', extraPressed))
-dot.addEventListener('click', () => {
-    dotPressed = true;
-})
+dot.addEventListener('click', () => dotPressed = true)
