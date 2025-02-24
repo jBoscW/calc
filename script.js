@@ -4,9 +4,9 @@ const display = document.querySelector('.display');
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 const extras = document.querySelectorAll('.extra');
+const dot = document.querySelector('#dot');
 
-
-let num1, num2, operation, result, equalPressed;
+let num1, num2, operation, result, equalPressed, dotPressed;
 
 //Function: basic
 function add(a, b) {
@@ -90,6 +90,7 @@ function newDigit() {
     if (num1 != null) num1String = num1.toString();
     if (num2 != null) num2String = num2.toString();
     
+
     // this code seemed the most readable? maybe there's smth better
     if ((num1 == null) || equalPressed) {
         num1 = parseFloat(digitPressedString);
@@ -105,6 +106,7 @@ function newDigit() {
         num2 = parseFloat(num2String + digitPressedString);
         updateDisplay(num2);
     };
+
 };
 
 function newOperatorPressed() {
@@ -157,3 +159,4 @@ function operate(a, b, oper) {
 numbers.forEach(button => button.addEventListener('click', newDigit));
 operators.forEach(button => button.addEventListener('click', newOperatorPressed));
 extras.forEach(button => button.addEventListener('click', extraPressed))
+dot.addEventListener('click', () => dotPressed = true)
