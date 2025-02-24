@@ -27,16 +27,29 @@ function divide(a, b) {
 
 // Function: updateDisplay and extra listeners;
 function updateDisplay(num) {
-    const numString = num.toString();
-
     if (num === 'criminal.') {
         display.textContent = num;
         num1 = num2 = result = operation = null;
-    } else if ((num / (10 ** 10) >= 1) && numString.length > 10) {
-        display.textContent = 'NaN';
     } else {
-        display.textContent = num;
-    };
+        const numString = num.toString();
+
+        const intPart = numString.split('.')[0];
+        const intLength = intPart ? intPart.length : 0;    
+        const decPart = numString.split('.')[1];
+        const decLength = decPart ? decPart.length : 0;    
+        
+        if ((intLength + decLength) > 10 && intLength < 10 && numString.length > 10) {
+            const decimalShown = 9 - intLength;
+            let shown = Math.floor(num * 10**decimalShown) / (10**decimalShown);
+            if (shown.toString().length > 10) shown = NaN;
+            display.textContent = shown;
+        } else if (intLength >= 10 && numString.length > 10) {
+            display.textContent = 'NaN';
+        } else {
+            display.textContent = num;
+        };
+    }
+    
 };
 
 function extraPressed() {
